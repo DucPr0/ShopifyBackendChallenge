@@ -1,2 +1,2 @@
 # ShopifyBackendChallenge
-Code for Shopify's backend developer intern challenge
+Code for Shopify's Backend Developer Intern challenge
