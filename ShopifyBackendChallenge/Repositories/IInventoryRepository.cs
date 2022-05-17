@@ -8,7 +8,7 @@ namespace ShopifyBackendChallenge.Repositories
 
         Task AddInventoryItems(IEnumerable<InventoryItemStorageEntity> inventoryItems);
 
-        Task<bool> DeleteInventoryItem(Guid id);
+        Task<bool> DeleteInventoryItem(int id);
 
         Task<bool> EditInventoryItem(InventoryItemStorageEntity inventoryItem);
     }

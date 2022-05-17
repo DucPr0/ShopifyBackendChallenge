@@ -30,7 +30,7 @@ namespace ShopifyBackendChallenge.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> DeleteInventoryItem(Guid id)
+        public async Task<bool> DeleteInventoryItem(int id)
         {
             return await this.inventoryService.DeleteInventoryItem(id);
         }

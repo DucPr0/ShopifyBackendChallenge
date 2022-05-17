@@ -26,6 +26,7 @@ builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 
 var mapperConfig = new MapperConfiguration(cfg =>
 {
+    cfg.CreateMap<InventoryItem, InventoryItemStorageEntity>();
     cfg.CreateMap<InventoryItemStorageEntity, InventoryItem>();
     cfg.CreateMap<InventoryItemAddRequest, InventoryItemStorageEntity>();
 });

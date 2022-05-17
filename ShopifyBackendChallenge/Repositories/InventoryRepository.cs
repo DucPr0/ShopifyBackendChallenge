@@ -25,7 +25,7 @@ namespace ShopifyBackendChallenge.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteInventoryItem(Guid id)
+        public async Task<bool> DeleteInventoryItem(int id)
         {
             using var dbContext = this.dbContextFactory.CreateDbContext();
 

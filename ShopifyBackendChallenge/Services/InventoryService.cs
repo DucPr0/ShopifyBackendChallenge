@@ -29,7 +29,7 @@ namespace ShopifyBackendChallenge.Services
             return this.inventoryRepository.AddInventoryItems(this.mapper.Map<IEnumerable<InventoryItemStorageEntity>>(inventoryItems));
         }
 
-        public Task<bool> DeleteInventoryItem(Guid id)
+        public Task<bool> DeleteInventoryItem(int id)
         {
             return this.inventoryRepository.DeleteInventoryItem(id);
         }
