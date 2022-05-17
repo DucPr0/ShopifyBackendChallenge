@@ -17,27 +17,27 @@ namespace ShopifyBackendChallenge.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<InventoryItem> GetInventoryItems()
+        public async Task<IEnumerable<InventoryItem>> GetInventoryItems()
         {
-            return this.inventoryService.GetInventoryItems();
+            return await this.inventoryService.GetInventoryItems();
         }
 
         [HttpPost]
-        public bool AddInventoryItems([FromBody] IEnumerable<InventoryItem> inventoryItems)
+        public async void AddInventoryItems([FromBody] IEnumerable<InventoryItem> inventoryItems)
         {
-            return this.inventoryService.AddInventoryItems(inventoryItems);
+            await this.inventoryService.AddInventoryItems(inventoryItems);
         }
 
         [HttpDelete("{id}")]
-        public bool DeleteInventoryItem(Guid id)
+        public async Task<bool> DeleteInventoryItem(Guid id)
         {
-            return this.inventoryService.DeleteInventoryItem(id);
+            return await this.inventoryService.DeleteInventoryItem(id);
         }
 
         [HttpPut]
-        public bool EditInventoryItem([FromBody] InventoryItem inventoryItem)
+        public async Task<bool> EditInventoryItem([FromBody] InventoryItem inventoryItem)
         {
-            return this.inventoryService.EditInventoryItem(inventoryItem);
+            return await this.inventoryService.EditInventoryItem(inventoryItem);
         }
     }
 }

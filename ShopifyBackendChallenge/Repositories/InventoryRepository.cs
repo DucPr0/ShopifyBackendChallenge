@@ -1,46 +1,53 @@
-﻿using ShopifyBackendChallenge.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopifyBackendChallenge.Models;
 
 namespace ShopifyBackendChallenge.Repositories
 {
     public class InventoryRepository : IInventoryRepository
     {
-        private readonly InventoryContext inventoryContext;
-        
+        private readonly IDbContextFactory<InventoryContext> dbContextFactory;
 
-        public InventoryRepository(InventoryContext inventoryContext)
+        public InventoryRepository(IDbContextFactory<InventoryContext> dbContextFactory)
         {
-            this.inventoryContext = inventoryContext;
+            this.dbContextFactory = dbContextFactory;
         }
 
-        public IEnumerable<InventoryItemStorageEntity> GetInventoryItems()
+        public async Task<IEnumerable<InventoryItemStorageEntity>> GetInventoryItems()
         {
-            return this.inventoryContext.Items.ToArray();
+            using var dbContext = this.dbContextFactory.CreateDbContext();
+            return await dbContext.GetAllEntities().ToArrayAsync();
         }
 
-        public bool AddInventoryItems(IEnumerable<InventoryItemStorageEntity> inventoryItems)
+        public async Task AddInventoryItems(IEnumerable<InventoryItemStorageEntity> inventoryItems)
         {
-            this.inventoryContext.Items.AddRange(inventoryItems);
-            this.inventoryContext.SaveChanges();
+            using var dbContext = this.dbContextFactory.CreateDbContext();
+            dbContext.AddRange(inventoryItems);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteInventoryItem(Guid id)
+        {
+            using var dbContext = this.dbContextFactory.CreateDbContext();
+
+            var foundItem = await dbContext.FindAsync(typeof(InventoryItemStorageEntity), id);
+            if (foundItem != null)
+            {
+                dbContext.Remove(foundItem);
+                await dbContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> EditInventoryItem(InventoryItemStorageEntity inventoryItem)
+        {
+            using var dbContext = this.dbContextFactory.CreateDbContext();
+            dbContext.Update(inventoryItem);
+            await dbContext.SaveChangesAsync();
             return true;
-        }
-
-        public bool DeleteInventoryItem(Guid id)
-        {
-            this.inventoryContext.Items.Remove(this.inventoryContext.Items.Find(id));
-            this.inventoryContext.SaveChanges();
-            return true;
-        }
-
-        public bool EditInventoryItem(InventoryItemStorageEntity inventoryItem)
-        {
-            this.inventoryContext.Entry(inventoryItem).Entity.Name = inventoryItem.Name;
-            this.inventoryContext.SaveChanges();
-            return true;
-        }
-
-        public void Dispose()
-        {
-            this.inventoryContext.Dispose();
         }
     }
 }

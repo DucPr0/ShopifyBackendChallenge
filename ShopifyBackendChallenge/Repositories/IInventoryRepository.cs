@@ -2,14 +2,14 @@
 
 namespace ShopifyBackendChallenge.Repositories
 {
-    public interface IInventoryRepository : IDisposable
+    public interface IInventoryRepository
     {
-        IEnumerable<InventoryItemStorageEntity> GetInventoryItems();
+        Task<IEnumerable<InventoryItemStorageEntity>> GetInventoryItems();
 
-        bool AddInventoryItems(IEnumerable<InventoryItemStorageEntity> inventoryItems);
+        Task AddInventoryItems(IEnumerable<InventoryItemStorageEntity> inventoryItems);
 
-        bool DeleteInventoryItem(Guid id);
+        Task<bool> DeleteInventoryItem(Guid id);
 
-        bool EditInventoryItem(InventoryItemStorageEntity inventoryItem);
+        Task<bool> EditInventoryItem(InventoryItemStorageEntity inventoryItem);
     }
 }

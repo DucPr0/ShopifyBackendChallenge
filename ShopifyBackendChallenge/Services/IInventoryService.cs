@@ -4,12 +4,12 @@ namespace ShopifyBackendChallenge.Services
 {
     public interface IInventoryService
     {
-        bool AddInventoryItems(IEnumerable<InventoryItem> inventoryItems);
+        Task AddInventoryItems(IEnumerable<InventoryItem> inventoryItems);
 
-        bool DeleteInventoryItem(Guid id);
+        Task<bool> DeleteInventoryItem(Guid id);
 
-        IEnumerable<InventoryItem> GetInventoryItems();
+        Task<IEnumerable<InventoryItem>> GetInventoryItems();
 
-        bool EditInventoryItem(InventoryItem inventoryItem);
+        Task<bool> EditInventoryItem(InventoryItem inventoryItem);
     }
 }

@@ -1,4 +1,6 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+
 using ShopifyBackendChallenge.Models;
 using ShopifyBackendChallenge.Repositories;
 using ShopifyBackendChallenge.Services;
@@ -12,6 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IInventoryService, InventoryService>();
+builder.Services.AddDbContextFactory<InventoryContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=TestDb;User Id=username;Password=passy123"));
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 
 var mapperConfig = new MapperConfiguration(cfg =>

@@ -18,22 +18,23 @@ namespace ShopifyBackendChallenge.Services
             this.mapper = mapper;
         } 
 
-        public IEnumerable<InventoryItem> GetInventoryItems()
+        public async Task<IEnumerable<InventoryItem>> GetInventoryItems()
         {
-            return this.mapper.Map<IEnumerable<InventoryItem>>(this.inventoryRepository.GetInventoryItems());
+            var result = await this.inventoryRepository.GetInventoryItems();
+            return this.mapper.Map<IEnumerable<InventoryItem>>(result);
         }
 
-        public bool AddInventoryItems(IEnumerable<InventoryItem> inventoryItems)
+        public Task AddInventoryItems(IEnumerable<InventoryItem> inventoryItems)
         {
             return this.inventoryRepository.AddInventoryItems(this.mapper.Map<IEnumerable<InventoryItemStorageEntity>>(inventoryItems));
         }
 
-        public bool DeleteInventoryItem(Guid id)
+        public Task<bool> DeleteInventoryItem(Guid id)
         {
             return this.inventoryRepository.DeleteInventoryItem(id);
         }
 
-        public bool EditInventoryItem(InventoryItem inventoryItem)
+        public Task<bool> EditInventoryItem(InventoryItem inventoryItem)
         {
             return this.inventoryRepository.EditInventoryItem(this.mapper.Map<InventoryItemStorageEntity>(inventoryItem));
         }

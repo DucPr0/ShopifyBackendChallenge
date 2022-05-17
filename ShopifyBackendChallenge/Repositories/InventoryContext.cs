@@ -1,21 +1,26 @@
 ﻿using ShopifyBackendChallenge.Mappings;
 using ShopifyBackendChallenge.Models;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopifyBackendChallenge.Repositories
 {
     public class InventoryContext : DbContext
     {
-        public DbSet<InventoryItemStorageEntity> Items { get; set; }
+        private DbSet<InventoryItemStorageEntity> Items { get; set; }
 
-        public InventoryContext() : 
-            base("Data Source=localhost;Initial Catalog=TestDb;User Id=username;Password=passy123")
+        public InventoryContext(DbContextOptions<InventoryContext> options) : 
+            base(options)
         {
         }
 
-        protected override void OnModelCreating(DbModelBuilder dbModelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            dbModelBuilder.Configurations.Add(new InventoryItemStorageMapping());
+            modelBuilder.ApplyConfiguration(new InventoryItemStorageMapping());
+        }
+
+        public IQueryable<InventoryItemStorageEntity> GetAllEntities()
+        {
+            return this.Items.AsNoTracking();
         }
     }
 }

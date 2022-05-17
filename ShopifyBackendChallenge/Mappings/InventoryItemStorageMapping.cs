@@ -1,20 +1,23 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using ShopifyBackendChallenge.Models;
 
 namespace ShopifyBackendChallenge.Mappings
 {
-    public class InventoryItemStorageMapping : EntityTypeConfiguration<InventoryItemStorageEntity>
+    public class InventoryItemStorageMapping : IEntityTypeConfiguration<InventoryItemStorageEntity>
     {
-        public InventoryItemStorageMapping()
+        public void Configure(EntityTypeBuilder<InventoryItemStorageEntity> builder)
         {
-            this.ToTable("Inventory");
+            builder.HasKey(x => x.Id);
 
-            this.HasKey(t => t.Id);
+            builder.ToTable("Inventory");
 
-            this.Property(t => t.Id).HasColumnName("id");
+            builder.Property(x => x.Id).HasColumnName("id");
 
-            this.Property(t => t.Name).HasColumnName("name");
+            builder.Property(x => x.Name).HasColumnName("name");
+
+            builder.Property(x => x.OriginCountry).HasColumnName("country");
         }
     }
 }
