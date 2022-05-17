@@ -50,7 +50,7 @@ namespace ShopifyBackendChallenge.Repositories
             if (foundItem != null)
             {
                 foundItem.Name = inventoryItem.Name;
-                foundItem.OriginCountry = inventoryItem.OriginCountry;
+                foundItem.Country = inventoryItem.Country;
                 await dbContext.SaveChangesAsync();
                 return true;
             } 

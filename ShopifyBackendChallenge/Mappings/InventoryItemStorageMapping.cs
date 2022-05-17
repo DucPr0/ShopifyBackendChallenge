@@ -17,7 +17,7 @@ namespace ShopifyBackendChallenge.Mappings
 
             builder.Property(x => x.Name).HasColumnName("name");
 
-            builder.Property(x => x.OriginCountry).HasColumnName("country");
+            builder.Property(x => x.Country).HasColumnName("country");
         }
     }
 }
