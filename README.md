@@ -28,16 +28,24 @@ curl -X POST localhost:5257/inventory \
   }
 ]'
 ```
+or for an inline version:
+```
+curl -X POST localhost:5257/inventory -H 'Content-Type: application/json' -d '[{ "name": "itemName", "country": "itemCountry"}, { "name": "itemName2", "country": "itemCountry2" }]'
+```
 
 Update:
 ```
 curl -X PUT localhost:5257/inventory \
   -H 'Content-Type: application/json' \
   -d '{
-  "id": 0,
+  "id": 1,
   "name": "string",
   "country": "string"
 }'
+```
+or for an inline version:
+```
+curl -X PUT localhost:5257/inventory -H 'Content-Type: application/json' -d '{ "id": 1, "name": "newName", "country": "newCountry" }'
 ```
 
 Delete:
