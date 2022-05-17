@@ -13,14 +13,21 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Initializes service.
 builder.Services.AddSingleton<IInventoryService, InventoryService>();
-builder.Services.AddDbContextFactory<InventoryContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=TestDb;User Id=username;Password=passy123"));
+
+// Initializes repository.
+// Read db's connection string from appsettings
+var config = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
+var dbConnectionString = config.GetSection("ConnectionString").Get<string>();
+builder.Services.AddDbContextFactory<InventoryContext>(options => options.UseSqlServer(dbConnectionString));
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 
 var mapperConfig = new MapperConfiguration(cfg =>
 {
-    cfg.CreateMap<InventoryItem, InventoryItemStorageEntity>();
     cfg.CreateMap<InventoryItemStorageEntity, InventoryItem>();
+    cfg.CreateMap<InventoryItemAddRequest, InventoryItemStorageEntity>();
 });
 builder.Services.AddSingleton<IMapper>(new Mapper(mapperConfig));
 

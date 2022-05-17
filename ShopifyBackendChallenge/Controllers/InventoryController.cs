@@ -23,8 +23,9 @@ namespace ShopifyBackendChallenge.Controllers
         }
 
         [HttpPost]
-        public async void AddInventoryItems([FromBody] IEnumerable<InventoryItem> inventoryItems)
+        public async void AddInventoryItems([FromBody] IEnumerable<InventoryItemAddRequest> inventoryItems)
         {
+            // TODO: Change this to accepting an AddRequest instead of an InventoryItem to ensure no UUIDs are supplied.
             await this.inventoryService.AddInventoryItems(inventoryItems);
         }
 

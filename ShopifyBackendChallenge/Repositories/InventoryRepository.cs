@@ -29,7 +29,7 @@ namespace ShopifyBackendChallenge.Repositories
         {
             using var dbContext = this.dbContextFactory.CreateDbContext();
 
-            var foundItem = await dbContext.FindAsync(typeof(InventoryItemStorageEntity), id);
+            var foundItem = await dbContext.FindAsync<InventoryItemStorageEntity>(id);
             if (foundItem != null)
             {
                 dbContext.Remove(foundItem);
@@ -45,9 +45,19 @@ namespace ShopifyBackendChallenge.Repositories
         public async Task<bool> EditInventoryItem(InventoryItemStorageEntity inventoryItem)
         {
             using var dbContext = this.dbContextFactory.CreateDbContext();
-            dbContext.Update(inventoryItem);
-            await dbContext.SaveChangesAsync();
-            return true;
+
+            var foundItem = await dbContext.FindAsync<InventoryItemStorageEntity>(inventoryItem.Id);
+            if (foundItem != null)
+            {
+                foundItem.Name = inventoryItem.Name;
+                foundItem.OriginCountry = inventoryItem.OriginCountry;
+                await dbContext.SaveChangesAsync();
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ShopifyBackendChallenge.Services
             return this.mapper.Map<IEnumerable<InventoryItem>>(result);
         }
 
-        public Task AddInventoryItems(IEnumerable<InventoryItem> inventoryItems)
+        public Task AddInventoryItems(IEnumerable<InventoryItemAddRequest> inventoryItems)
         {
             return this.inventoryRepository.AddInventoryItems(this.mapper.Map<IEnumerable<InventoryItemStorageEntity>>(inventoryItems));
         }

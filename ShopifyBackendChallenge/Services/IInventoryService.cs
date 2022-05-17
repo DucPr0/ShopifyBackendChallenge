@@ -4,7 +4,7 @@ namespace ShopifyBackendChallenge.Services
 {
     public interface IInventoryService
     {
-        Task AddInventoryItems(IEnumerable<InventoryItem> inventoryItems);
+        Task AddInventoryItems(IEnumerable<InventoryItemAddRequest> inventoryItems);
 
         Task<bool> DeleteInventoryItem(Guid id);
 
