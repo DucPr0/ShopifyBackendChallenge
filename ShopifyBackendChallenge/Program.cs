@@ -26,9 +26,12 @@ builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 
 var mapperConfig = new MapperConfiguration(cfg =>
 {
-    cfg.CreateMap<InventoryItem, InventoryItemStorageEntity>();
     cfg.CreateMap<InventoryItemStorageEntity, InventoryItem>();
-    cfg.CreateMap<InventoryItemAddRequest, InventoryItemStorageEntity>();
+    cfg.CreateMap<InventoryItemAddRequest, InventoryItemStorageEntity>()
+        .ForMember(dest => dest.Name, src => src.MapFrom(src => src.Name))
+        .ForMember(dest => dest.Country, src => src.MapFrom(src => src.Country))
+        .ForMember(dest => dest.IsDeleted, src => src.MapFrom(src => false));
+    cfg.CreateMap<InventoryItem, InventoryItemResponse>();
 });
 builder.Services.AddSingleton<IMapper>(new Mapper(mapperConfig));
 

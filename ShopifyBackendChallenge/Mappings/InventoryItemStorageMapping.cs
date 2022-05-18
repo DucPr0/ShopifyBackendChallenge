@@ -18,6 +18,12 @@ namespace ShopifyBackendChallenge.Mappings
             builder.Property(x => x.Name).HasColumnName("name");
 
             builder.Property(x => x.Country).HasColumnName("country");
+
+            builder.Property(x => x.IsDeleted).HasColumnName("isDeleted");
+
+            builder.Property(x => x.DeleteReason).HasColumnName("deleteReason");
+
+            builder.Property(x => x.DeleteTime).HasColumnName("deleteTime").HasColumnType("datetime");
         }
     }
 }

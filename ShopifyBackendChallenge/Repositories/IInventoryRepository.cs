@@ -6,10 +6,14 @@ namespace ShopifyBackendChallenge.Repositories
     {
         Task<IEnumerable<InventoryItemStorageEntity>> GetInventoryItems();
 
+        Task<IEnumerable<InventoryItemStorageEntity>> GetDeletedItems();
+
+        Task<bool> RestoreInventoryItem(int id);
+
         Task AddInventoryItems(IEnumerable<InventoryItemStorageEntity> inventoryItems);
 
-        Task<bool> DeleteInventoryItem(int id);
+        Task<bool> DeleteInventoryItem(int id, InventoryItemDeleteRequest deleteRequest);
 
-        Task<bool> EditInventoryItem(InventoryItemStorageEntity inventoryItem);
+        Task<bool> EditInventoryItem(InventoryItemEditRequest editRequest);
     }
 }
