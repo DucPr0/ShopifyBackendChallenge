@@ -8,7 +8,7 @@ URL: https://replit.com/@littleguy3/ShopifyBackendChallenge
 
 The application does not have an UI, so curl must be used to create requests.
 
-The Repl has to be forked in order to access a second console to execute queries. After forking, press 'Run' to launch the application.
+The Repl has to be forked in order to access a shell to create and execute queries. After forking, press 'Run' to launch the application.
 
 Example commands are as belows:
 
@@ -23,18 +23,18 @@ curl -X POST localhost:5257/inventory \
   -H 'Content-Type: application/json' \
   -d '[
   {
-    "name": "itemName",
-    "country": "itemCountry"
+    "name": "Vase",
+    "country": "China"
   },
   {
-    "name": "itemName2",
-    "country": "itemCountry2"
+    "name": "Car",
+    "country": "America"
   }
 ]'
 ```
 or for an inline version:
 ```
-curl -X POST localhost:5257/inventory -H 'Content-Type: application/json' -d '[{ "name": "itemName", "country": "itemCountry"}, { "name": "itemName2", "country": "itemCountry2" }]'
+curl -X POST localhost:5257/inventory -H 'Content-Type: application/json' -d '[{ "name": "Vase", "country": "China" }, { "name": "Car", "country": "America" }]'
 ```
 
 Update:
@@ -43,16 +43,26 @@ curl -X PUT localhost:5257/inventory \
   -H 'Content-Type: application/json' \
   -d '{
   "id": 1,
-  "name": "string",
-  "country": "string"
+  "name": "Vase",
+  "country": "Germany"
 }'
 ```
 or for an inline version:
 ```
-curl -X PUT localhost:5257/inventory -H 'Content-Type: application/json' -d '{ "id": 1, "name": "newName", "country": "newCountry" }'
+curl -X PUT localhost:5257/inventory -H 'Content-Type: application/json' -d '{ "id": 1, "name": "Vase", "country": "Germany" }'
 ```
 
 Delete:
 ```
-curl -X DELETE localhost:5257/inventory/1
+curl -X DELETE localhost:5257/inventory/{id} -d '{ "deleteReason": "shipped" }'
+```
+
+Undelete item:
+```
+curl -X PUT localhost:5257/inventory/restore/{id}
+```
+
+View all deleted items: 
+```
+curl -X GET localhost:5257/inventory/deleted
 ```
