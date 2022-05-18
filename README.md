@@ -54,5 +54,15 @@ curl -X PUT localhost:5257/inventory -H 'Content-Type: application/json' -d '{ "
 
 Delete:
 ```
-curl -X DELETE localhost:5257/inventory/1
+curl -X DELETE localhost:5257/inventory/{id} -d '{ "deleteReason": "shipped" }'
+```
+
+Undelete item:
+```
+curl -X PUT localhost:5257/inventory/restore/{id}
+```
+
+View all deleted items: 
+```
+curl -X GET localhost:5257/inventory/deleted
 ```
