@@ -8,7 +8,7 @@ URL: https://replit.com/@littleguy3/ShopifyBackendChallenge
 
 The application does not have an UI, so curl must be used to create requests.
 
-The Repl has to be forked in order to access a shell to create and execute queries. After forking, press 'Run' to launch the application.
+The Repl has to be forked in order to access a shell to create and execute curl queries. After forking, press 'Run' to launch the application.
 
 Example commands are as belows:
 
