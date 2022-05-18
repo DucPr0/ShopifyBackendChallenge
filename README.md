@@ -6,9 +6,11 @@ https://docs.google.com/document/d/1PoxpoaJymXmFB3iCMhGL6js-ibht7GO_DkCF2elCySU/
 # Replit
 URL: https://replit.com/@littleguy3/ShopifyBackendChallenge
 
-Press 'Run' on Replit to launch the application.
+The application does not have an UI, so curl must be used to create requests.
 
-The application does not have an UI, so curl must be used to create requests. Example commands are as belows:
+The Repl has to be forked in order to access a second console to execute queries. After forking, press 'Run' to launch the application.
+
+Example commands are as belows:
 
 Get:
 ```
