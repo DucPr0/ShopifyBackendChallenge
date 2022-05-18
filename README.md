@@ -62,7 +62,7 @@ Undelete item:
 curl -X PUT localhost:5257/inventory/restore/{id}
 ```
 
-View all deleted items: 
+View the most recently deleted items: 
 ```
 curl -X GET localhost:5257/inventory/deleted
 ```
