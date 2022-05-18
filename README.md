@@ -4,7 +4,8 @@ Source code for Shopify's Backend Developer Intern challenge.
 https://docs.google.com/document/d/1PoxpoaJymXmFB3iCMhGL6js-ibht7GO_DkCF2elCySU/edit
 
 # Replit
-URL: https://replit.com/@littleguy3/ShopifyBackendChallenge
+Account URL: https://replit.com/@littleguy3
+Application URL: https://replit.com/@littleguy3/ShopifyBackendChallenge
 
 The application does not have an UI, so curl must be used to create requests.
 
